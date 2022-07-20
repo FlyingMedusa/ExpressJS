@@ -1,0 +1,9 @@
+# Default ignored
+/workspace.xml
+/.idea
+/__pycache__
+/.vscode
+/node_modules
+.eslintrc
+package.json
+package-lock.json
