@@ -4,14 +4,10 @@ const { join } = require('path');
 const app = express();
 
 app.get('/', (req, res) => {
-  res.sendFile('dice.jpg', {
-    // security reasons
+  res.attachment('dice.jpg', {
     root: join(__dirname, 'files'),
-    // extras
-    headers: {
-      'X-Best-JS-Code': 'Course',
-    },
   });
+  res.end();
 });
 
 app.listen(3000);
