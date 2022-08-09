@@ -1,4 +1,5 @@
 const express = require('express');
+const { IpRestrict } = require('../utils/ip-restricter');
 
 const voteRouter = express.Router();
 
@@ -7,6 +8,8 @@ const votes = {
   no: 0,
 };
 
+const ipRestrict = new IpRestrict();
+
 voteRouter
   .get('/check', (req, res) => {
     const info = Object.entries(votes).map((ar) => `Votes on ${ar[0]}: ${ar[1]}`).join('<br>');
@@ -14,6 +17,9 @@ voteRouter
   })
 
   .get('/:voteName', (req, res) => {
+    if (!ipRestrict.check(req.ip)) {
+      res.status(403).send('Your vote has already been sent!');
+    }
     const { voteName } = req.params;
     if (typeof votes[voteName] === 'undefined') {
       votes[voteName] = 0;
