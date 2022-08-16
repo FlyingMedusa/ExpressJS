@@ -1,0 +1,17 @@
+<h3>Selected base and extras</h3>
+<ul>
+    <li>Base: {{cookie.base}} - {{pricify (findPrice allBases cookie.base)}} PLN</li>
+</ul>
+<ul>
+    {{#each @root.cookie.extras}}
+        <li>
+            {{#if (not ../noDeleteBtn)}}
+                <a href="/config/delete-addon/{{this}}" class="btn btn-small">Delete</a>
+            {{/if}}
+            Extra: {{this}} - {{pricify (findPrice @root.allExtras this)}} PLN
+        </li>
+    {{/each}}
+</ul>
+<p>
+    <strong>Total: {{pricify sum}} PLN</strong>
+</p>
